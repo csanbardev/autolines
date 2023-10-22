@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/styles.css">
+  <title>Autolines</title>
+</head>
+
+<body>
+  <aside>
+    <h1>Olvidate de líneas de código repetitivas</h1>
+    <h3>Introduce las opciones</h3>
+    <form action="" method="post">
+      <label for="cadena">Tu cadena
+        <input required type="text" name="cadena" placeholder="El número se marca con %%n%%" />
+      </label>
+      <label for="cantidad">Las repeticiones de la cadena
+        <input required type="number" name="cantidad" placeholder="Un número de veces">
+      </label>
+      <label for="bloques">División por bloques (opcional)
+        <input type="number" name="bloques" placeholder="Bloques a dividir">
+      </label>
+      <button id="bt-generar">Generar</button>
+    </form>
+  </aside>
+  <section>
+    <h3>Aquí se generan tus líneas de código</h3>
+    <article id="code-container">
+    </article>
+    <button id="bt-copy">Copiar</button>
+  </section>
+  <script src="./javascript/linesCreator.js"></script>
+</body>
+
+</html>

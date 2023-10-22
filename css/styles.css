@@ -1,0 +1,71 @@
+body {
+  margin: 0;
+  padding: 0;
+  margin-left: 15rem;
+  margin-right: 15rem;
+  margin-top: 5rem;
+  background-color: rgb(3, 3, 27);
+  color: whitesmoke;
+  display: grid;
+  grid-template-columns: 30% 1fr;
+  gap: 15rem;
+}
+
+h1,
+h3 {
+  text-align: center;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: .7rem;
+}
+
+input,
+button {
+  border: none;
+  border-radius: 5px;
+  background-color: rgb(121, 110, 95);
+  padding: .5rem;
+
+}
+
+input {
+  display: block;
+  text-decoration: none;
+  width: 50%;
+  margin-top: .3rem;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+button {
+  margin-top: 1rem;
+  width: 30%;
+  cursor: pointer;
+}
+
+section{
+  padding: 3rem;
+  background-color: rgb(7, 66, 66);
+  border-radius: 5px;
+}
+#code-container{
+  background-color: rgb(5, 107, 107);
+  max-height: 11rem;
+  margin: 1rem;
+  padding: 1.5rem;
+  border-radius: 3px;
+  overflow:scroll;
+}
