@@ -22,6 +22,16 @@
       <label for="bloques">División por bloques (opcional)
         <input type="number" name="bloques" placeholder="Bloques a dividir">
       </label>
+      <label for="divisor">Divisor (por defecto, [,])
+        <select name="divisor" id="">
+          <option value="," selected>,</option>
+          <option value=";" >;</option>
+          <option value="+" >+</option>
+          <option value="-" >-</option>
+          <option value="*" >*</option>
+          <option value="/" >/</option>
+        </select>
+      </label>
       <button id="bt-generar">Generar</button>
     </form>
   </aside>

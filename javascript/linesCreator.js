@@ -1,5 +1,5 @@
 const submitButton = document.querySelector('#bt-generar')
-const copyButton= document.querySelector('#bt-copy')
+const copyButton = document.querySelector('#bt-copy')
 
 submitButton.addEventListener('click', (event) => handleSubmit(event))
 copyButton.addEventListener('click', () => handleCopy())
@@ -14,9 +14,10 @@ copyButton.addEventListener('click', () => handleCopy())
  * @param {number} bloque El número de repeticiones del patrón por línea
  * @returns {string} Las líneas generadas
  */
-const generar = (patron, cantidad = 1, bloque = 1) => {
+const generar = (patron, cantidad = 1, bloque = 1, divisor) => {
   let bloqueLineas = "";
   const HAY_BLOQUES = bloque >= 2
+  const DEFAULT_DIVISOR = ","
 
 
   if (cantidad <= 0 || bloque <= 0) {
@@ -36,14 +37,17 @@ const generar = (patron, cantidad = 1, bloque = 1) => {
 
     if (HAY_BLOQUES) {
       for (let j = 1; j <= bloque; j++) {
-        linea += sustituirCadena(patron, i);
+        // comprueba que sea el último eleemnto del bloque o del total
+        const ULTIMO_ELEMENTO_BLOQ = j == bloque || i == cantidad
+        
+        linea += sustituirCadena(patron, i, ULTIMO_ELEMENTO_BLOQ ? DEFAULT_DIVISOR : divisor);
         i++
         if (i > cantidad) {
           j = bloque
         }
       }
     } else {
-      linea = sustituirCadena(patron, i);
+      linea = sustituirCadena(patron, i, DEFAULT_DIVISOR);
     }
 
     bloqueLineas += linea + "\n";
@@ -55,8 +59,8 @@ const generar = (patron, cantidad = 1, bloque = 1) => {
   return bloqueLineas;
 }
 
-const sustituirCadena = (cadena, numero) => {
-  return cadena.replace(/%%n%%/g, numero) + ", ";
+const sustituirCadena = (cadena, numero, divisor) => {
+  return cadena.replace(/%%n%%/g, numero) + `${divisor} `;
 }
 
 
@@ -69,15 +73,15 @@ const handleCopy = () => {
 const handleSubmit = (event) => {
   event.preventDefault()
 
-  const { cadena, cantidad, bloques } = document.querySelector('form').elements
-  const result = generar(cadena.value, cantidad.value, bloques.value === "" ? 1 : bloques.value)
+  const { cadena, cantidad, bloques, divisor } = document.querySelector('form').elements
+  const result = generar(cadena.value, cantidad.value, bloques.value === "" ? 1 : bloques.value, divisor.value)
   pintarCodigo(result)
 }
 
 const pintarCodigo = (codigo) => {
   const contenedor = document.querySelector('#code-container')
   contenedor.textContent = codigo
-  contenedor.style.whiteSpace = "pre-line"; 
+  contenedor.style.whiteSpace = "pre-line";
 }
 
 const copyPaste = (texto) => {
