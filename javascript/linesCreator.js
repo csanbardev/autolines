@@ -14,10 +14,11 @@ copyButton.addEventListener('click', () => handleCopy())
  * @param {number} bloque El número de repeticiones del patrón por línea
  * @returns {string} Las líneas generadas
  */
-const generar = (patron, cantidad = 1, bloque = 1, divisor) => {
+const generar = (patron, cantidad = 1, bloque = 1, divisor, comentario="") => {
   let bloqueLineas = "";
   const HAY_BLOQUES = bloque >= 2
   const DEFAULT_DIVISOR = ","
+  let numBloque = 1
 
 
   if (cantidad <= 0 || bloque <= 0) {
@@ -39,8 +40,12 @@ const generar = (patron, cantidad = 1, bloque = 1, divisor) => {
       for (let j = 1; j <= bloque; j++) {
         // comprueba que sea el último eleemnto del bloque o del total
         const ULTIMO_ELEMENTO_BLOQ = j == bloque || i == cantidad
-        
-        linea += sustituirCadena(patron, i, ULTIMO_ELEMENTO_BLOQ ? DEFAULT_DIVISOR : divisor);
+        const HAY_COMENTARIO = comentario !== ""
+
+        linea += sustituirCadena(patron, i, ULTIMO_ELEMENTO_BLOQ ? DEFAULT_DIVISOR : divisor, ULTIMO_ELEMENTO_BLOQ && HAY_COMENTARIO ? comentario+numBloque : "");
+
+        // pasa al siguiente bloque
+        if (ULTIMO_ELEMENTO_BLOQ) numBloque++
         i++
         if (i > cantidad) {
           j = bloque
@@ -59,8 +64,8 @@ const generar = (patron, cantidad = 1, bloque = 1, divisor) => {
   return bloqueLineas;
 }
 
-const sustituirCadena = (cadena, numero, divisor) => {
-  return cadena.replace(/%%n%%/g, numero) + `${divisor} `;
+const sustituirCadena = (cadena, numero, divisor, comentario = "") => {
+  return cadena.replace(/%%n%%/g, numero) + ` ${comentario}${divisor} `;
 }
 
 
@@ -73,8 +78,8 @@ const handleCopy = () => {
 const handleSubmit = (event) => {
   event.preventDefault()
 
-  const { cadena, cantidad, bloques, divisor } = document.querySelector('form').elements
-  const result = generar(cadena.value, cantidad.value, bloques.value === "" ? 1 : bloques.value, divisor.value)
+  const { cadena, cantidad, bloques, divisor, comentario } = document.querySelector('form').elements
+  const result = generar(cadena.value, cantidad.value, bloques.value === "" ? 1 : bloques.value, divisor.value, comentario.value)
   pintarCodigo(result)
 }
 
